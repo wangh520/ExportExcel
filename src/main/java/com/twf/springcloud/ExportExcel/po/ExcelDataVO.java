@@ -1,11 +1,12 @@
 package com.twf.springcloud.ExportExcel.po;
 
 /**
- * Author: Dreamer-1
- * Date: 2019-03-01
- * Time: 11:33
- * Description: 读取Excel时，封装读取的每一行的数据
- */
+ * @Author wangh
+ * @Description //TODO 
+ * @Date 13:45 2020/8/12
+ * @Param 
+ * @return 
+ **/
 public class ExcelDataVO {
 
     /**

@@ -19,11 +19,10 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * Author: Dreamer-1
- * Date: 2019-03-01
- * Time: 10:21
- * Description: 读取Excel内容
- */
+ * @Author wangh
+ * @Description 读取Excel内容
+ * @Date 13:45 2020/8/12
+ **/
 public class ExcelReaderUtil {
 
     private static Logger logger = Logger.getLogger(ExcelReaderUtil.class.getName()); // 日志打印类

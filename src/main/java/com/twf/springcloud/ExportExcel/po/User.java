@@ -1,7 +1,13 @@
 package com.twf.springcloud.ExportExcel.po;
 
 import java.io.Serializable;
-
+/**
+ * @Author wangh
+ * @Description //TODO 
+ * @Date 13:45 2020/8/12
+ * @Param 
+ * @return 
+ **/
 public class User implements Serializable{
 
 	private static final long serialVersionUID = -9180229310895087286L;
