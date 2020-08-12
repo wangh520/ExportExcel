@@ -44,7 +44,7 @@ public class ExportController {
 			//错误列表
 			List<User> errors = new ArrayList<User>();
 			//站点数据列表
-			List<User> stations = ExcelPOIUtils.readExc(file, User.class,errorMap,errors,24);
+			List<User> stations = ExcelPOIUtils.readExc(file, User.class,errorMap,errors,6);
 			HashMap<String, Object> maps = new HashMap<>();
 			maps.put("succ", stations);
 			maps.put("fail", errorMap);
