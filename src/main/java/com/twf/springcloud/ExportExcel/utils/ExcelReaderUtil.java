@@ -1,6 +1,6 @@
 package com.twf.springcloud.ExportExcel.utils;
 
-import com.twf.springcloud.ExportExcel.po.ExcelDataVO;
+import com.twf.springcloud.ExportExcel.po.User;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -52,7 +52,7 @@ public class ExcelReaderUtil {
      * @param fileName 要读取的Excel文件所在路径
      * @return 读取结果列表，读取失败时返回null
      */
-    public static List<ExcelDataVO> readExcel(String fileName) {
+    public static List<User> readExcel(String fileName) {
 
         Workbook workbook = null;
         FileInputStream inputStream = null;
@@ -72,7 +72,7 @@ public class ExcelReaderUtil {
             workbook = getWorkbook(inputStream, fileType);
 
             // 读取excel中的数据
-            List<ExcelDataVO> resultDataList = parseExcel(workbook);
+            List<User> resultDataList = parseExcel(workbook);
 
             return resultDataList;
         } catch (Exception e) {
@@ -98,7 +98,7 @@ public class ExcelReaderUtil {
      * @param file 上传的Excel文件
      * @return 读取结果列表，读取失败时返回null
      */
-    public static List<ExcelDataVO> readExcel(MultipartFile file) {
+    public static List<User> readExcel(MultipartFile file) {
 
         Workbook workbook = null;
 
@@ -115,7 +115,7 @@ public class ExcelReaderUtil {
             workbook = getWorkbook(file.getInputStream(), fileType);
 
             // 读取excel中的数据
-            List<ExcelDataVO> resultDataList = parseExcel(workbook);
+            List<User> resultDataList = parseExcel(workbook);
 
             return resultDataList;
         } catch (Exception e) {
@@ -139,8 +139,8 @@ public class ExcelReaderUtil {
      * @param workbook Excel工作簿对象
      * @return 解析结果
      */
-    private static List<ExcelDataVO> parseExcel(Workbook workbook) {
-       List<ExcelDataVO> resultDataList = new ArrayList<>();
+    private static List<User> parseExcel(Workbook workbook) {
+       List<User> resultDataList = new ArrayList<>();
         // 解析sheet
         for (int sheetNum = 0; sheetNum < workbook.getNumberOfSheets(); sheetNum++) {
             Sheet sheet = workbook.getSheetAt(sheetNum);
@@ -167,7 +167,7 @@ public class ExcelReaderUtil {
                     continue;
                 }
 
-                ExcelDataVO resultData = convertRowToData(row);
+                User resultData = convertRowToData(row);
                 if (null == resultData) {
                     logger.warning("第 " + row.getRowNum() + "行数据不合法，已忽略！");
                     continue;
@@ -225,8 +225,8 @@ public class ExcelReaderUtil {
      * @param row 行数据
      * @return 解析后的行数据对象，行数据错误时返回null
      */
-    private static ExcelDataVO convertRowToData(Row row) {
-        ExcelDataVO resultData = new ExcelDataVO();
+    private static User convertRowToData(Row row) {
+        User resultData = new User();
 
         Cell cell;
         int cellNum = 0;
@@ -243,14 +243,14 @@ public class ExcelReaderUtil {
         } else {
             resultData.setAge(Integer.parseInt(ageStr));
         }
-        // 获取居住地
+        // 性别
         cell = row.getCell(cellNum++);
-        String location = convertCellValueToString(cell);
-        resultData.setLocation(location);
-        // 获取职业
+        String sex = convertCellValueToString(cell);
+        resultData.setSex(sex);
+        // 手机号
         cell = row.getCell(cellNum++);
-        String job = convertCellValueToString(cell);
-        resultData.setJob(job);
+        String phoneNo = convertCellValueToString(cell);
+        resultData.setPhoneNo(phoneNo);
 
         return resultData;
     }
@@ -261,7 +261,7 @@ public class ExcelReaderUtil {
         // 设定Excel文件所在路径
         String excelFileName = "/Users/Dreamer-1/Desktop/myBlog/java解析Excel/readExample.xlsx";
         // 读取Excel文件内容
-        List<ExcelDataVO> readResult = ExcelReaderUtil.readExcel(excelFileName);
+        List<User> readResult = ExcelReaderUtil.readExcel(excelFileName);
 
     }
 

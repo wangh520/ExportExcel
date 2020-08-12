@@ -3,8 +3,8 @@ package com.twf.springcloud.ExportExcel.po;
 import java.io.Serializable;
 /**
  * @Author wangh
- * @Description //TODO 
- * @Date 13:45 2020/8/12
+ * @Description //TODO
+ * @Date 13:57 2020/8/12
  * @Param 
  * @return 
  **/
@@ -32,6 +32,10 @@ public class User implements Serializable{
 		this.phoneNo = phoneNo;
 		this.address = address;
 		this.hobby = hobby;
+	}
+
+	public User() {
+
 	}
 
 	public String getName() {
