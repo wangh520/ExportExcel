@@ -1,5 +1,7 @@
 package com.twf.springcloud.ExportExcel.po;
 
+import com.twf.springcloud.ExportExcel.enumClass.ExcelFiled;
+
 import java.io.Serializable;
 /**
  * @Author wangh
@@ -9,19 +11,17 @@ import java.io.Serializable;
  * @return 
  **/
 public class User implements Serializable{
-
-	private static final long serialVersionUID = -9180229310895087286L;
-
+	@ExcelFiled(colIndex=0,colName="姓名",skip=true)
 	private String name; // 姓名
-	
+	@ExcelFiled(colIndex=1,colName="性别")
 	private String sex; // 性别
-	
+	@ExcelFiled(colIndex=2,colName="年龄")
 	private Integer age; // 年龄
-	
+	@ExcelFiled(colIndex=3,colName="手机号",skip=true)
 	private String phoneNo; // 手机号
-	
+	@ExcelFiled(colIndex=4,colName="地址",skip=true)
 	private String address; // 地址
-	
+	@ExcelFiled(colIndex=5,colName="爱好")
 	private String hobby; // 爱好
 	
 	public User(String name, String sex, Integer age, String phoneNo, String address, String hobby) {

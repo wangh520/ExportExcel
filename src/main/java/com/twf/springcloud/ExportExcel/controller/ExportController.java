@@ -16,11 +16,6 @@ public class ExportController {
 	@Autowired
 	private ExportService exportService;
 
-	// 导出excel
-	@RequestMapping("exportExcel")
-	public ResponseEntity<byte[]> exportExcel(HttpServletRequest request, HttpServletResponse response) {
-		return exportService.exportExcel(request,response);
-	}
 
 	// 导出excel优化方法
 	@RequestMapping("exportExcel1")
