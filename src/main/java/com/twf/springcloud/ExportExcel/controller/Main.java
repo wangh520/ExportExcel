@@ -1,7 +1,7 @@
 package com.twf.springcloud.ExportExcel.controller;
 
 
-import com.twf.springcloud.ExportExcel.po.User;
+import com.twf.springcloud.ExportExcel.entity.User;
 import com.twf.springcloud.ExportExcel.utils.ExcelPOIUtils;
 
 import java.io.File;

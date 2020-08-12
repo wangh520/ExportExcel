@@ -1,6 +1,6 @@
 package com.twf.springcloud.ExportExcel.sevice.impl;
 
-import com.twf.springcloud.ExportExcel.po.User;
+import com.twf.springcloud.ExportExcel.entity.User;
 import com.twf.springcloud.ExportExcel.sevice.ExportService;
 import com.twf.springcloud.ExportExcel.utils.ExcelWriterUtil;
 import org.apache.poi.ss.usermodel.*;

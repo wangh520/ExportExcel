@@ -1,6 +1,6 @@
 package com.twf.springcloud.ExportExcel.utils;
 
-import com.twf.springcloud.ExportExcel.po.User;
+import com.twf.springcloud.ExportExcel.entity.User;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
