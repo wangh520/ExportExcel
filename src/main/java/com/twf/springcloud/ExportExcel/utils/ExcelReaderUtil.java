@@ -1,5 +1,6 @@
-package com.twf.springcloud.ExportExcel.po;
+package com.twf.springcloud.ExportExcel.utils;
 
+import com.twf.springcloud.ExportExcel.po.ExcelDataVO;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -13,7 +14,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -22,9 +24,9 @@ import java.util.logging.Logger;
  * Time: 10:21
  * Description: 读取Excel内容
  */
-public class ExcelReader {
+public class ExcelReaderUtil {
 
-    private static Logger logger = Logger.getLogger(ExcelReader.class.getName()); // 日志打印类
+    private static Logger logger = Logger.getLogger(ExcelReaderUtil.class.getName()); // 日志打印类
 
     private static final String XLS = "xls";
     private static final String XLSX = "xlsx";
@@ -252,6 +254,16 @@ public class ExcelReader {
         resultData.setJob(job);
 
         return resultData;
+    }
+
+    public static void main(String[] args) {
+
+        /************** 读取Excel流程 ******************/
+        // 设定Excel文件所在路径
+        String excelFileName = "/Users/Dreamer-1/Desktop/myBlog/java解析Excel/readExample.xlsx";
+        // 读取Excel文件内容
+        List<ExcelDataVO> readResult = ExcelReaderUtil.readExcel(excelFileName);
+
     }
 
 }

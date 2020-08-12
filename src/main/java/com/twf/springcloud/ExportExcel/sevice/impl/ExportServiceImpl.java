@@ -99,6 +99,9 @@ public class ExportServiceImpl implements ExportService{
 					if (inputStream != null)
 						inputStream.close();
 				}
+				if (null != workbook) {
+					workbook.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
