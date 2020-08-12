@@ -1,6 +1,5 @@
 package com.twf.springcloud.ExportExcel.sevice.impl;
 
-import com.twf.springcloud.ExportExcel.controller.BaseFrontController;
 import com.twf.springcloud.ExportExcel.po.User;
 import com.twf.springcloud.ExportExcel.sevice.ExportService;
 import com.twf.springcloud.ExportExcel.utils.ExcelFormatUtil;
@@ -31,16 +30,21 @@ public class ExportServiceImpl implements ExportService{
 	public ResponseEntity<byte[]> exportExcel(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			logger.info(">>>>>>>>>>开始导出excel>>>>>>>>>>");
-			
 			// 造几条数据
 			List<User> list = new ArrayList<User>();
 			list.add(new User("唐三藏", "男", 30, "13411111111", "东土大唐", "取西经"));
 			list.add(new User("孙悟空", "男", 29, "13411111112", "菩提院", "打妖怪"));
 			list.add(new User("猪八戒", "男", 28, "13411111113", "高老庄", "偷懒"));
 			list.add(new User("沙悟净", "男", 27, "13411111114", "流沙河", "挑担子"));
-			
-			BaseFrontController baseFrontController = new BaseFrontController();
-			return baseFrontController.buildResponseEntity(export((List<User>) list), "用户表.xls");
+
+            // 每一列字段名
+            String[] title = new String[] {"序号", "姓名", "性别", "年龄", "手机号", "地址","爱好" };
+
+            // 字段名所在表格的宽度
+            int[] titleLength = new int[] {5000, 5000, 5000, 5000, 5000, 5000, 5000 };
+
+			String tableName = "用户表.xlsx";
+			return ExcelFormatUtil.buildResponseEntity(exportData((List<User>) list,tableName,title,titleLength), tableName);
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(">>>>>>>>>>导出excel 异常，原因为：" + e.getMessage());
@@ -48,35 +52,36 @@ public class ExportServiceImpl implements ExportService{
 		return null;
 	}
 
-	private InputStream export(List<User> list) {
+	private InputStream exportData(List<User> list,String tableName,String[] title,int[] titleLength) {
 		logger.info(">>>>>>>>>>>>>>>>>>>>开始进入导出方法>>>>>>>>>>");
 		ByteArrayOutputStream output = null;
 		InputStream inputStream1 = null;
-		SXSSFWorkbook wb = new SXSSFWorkbook(1000);// 保留1000条数据在内存中
+		// 如需生成xls的Excel，请使用下面的工作簿对象，注意后续输出时文件后缀名也需更改为xls
+		//Workbook workbook = new HSSFWorkbook();
+		SXSSFWorkbook wb = new SXSSFWorkbook();
 		SXSSFSheet sheet = wb.createSheet();
+
+
 		// 设置报表头样式
 		CellStyle header = ExcelFormatUtil.headSytle(wb);// cell样式
 		CellStyle content = ExcelFormatUtil.contentStyle(wb);// 报表体样式
-		
-		// 每一列字段名
-		String[] strs = new String[] { "姓名", "性别", "年龄", "手机号", "地址","爱好" };
-		
-		// 字段名所在表格的宽度
-		int[] ints = new int[] { 5000, 5000, 5000, 5000, 5000, 5000 };
-		
+
 		// 设置表头样式
-		ExcelFormatUtil.initTitleEX(sheet, header, strs, ints);
+		ExcelFormatUtil.initTitleEX(sheet, header, title, titleLength,tableName);
 		logger.info(">>>>>>>>>>>>>>>>>>>>表头样式设置完成>>>>>>>>>>");
-		
+
 		if (list != null && list.size() > 0) {
 			logger.info(">>>>>>>>>>>>>>>>>>>>开始遍历数据组装单元格内容>>>>>>>>>>");
 			for (int i = 0; i < list.size(); i++) {
 				User user = list.get(i);
 
-				SXSSFRow row = sheet.createRow(i + 1);
+				SXSSFRow row = sheet.createRow(i + 2);
 				int j = 0;
-
 				SXSSFCell cell = row.createCell(j++);
+				cell.setCellValue(i+1); // 序号
+				cell.setCellStyle(content);
+
+				cell = row.createCell(j++);
 				cell.setCellValue(user.getName()); // 姓名
 				cell.setCellStyle(content);
 
@@ -95,7 +100,7 @@ public class ExportServiceImpl implements ExportService{
 				cell = row.createCell(j++);
 				cell.setCellValue(user.getAddress()); // 地址
 				cell.setCellStyle(content);
-				
+
 				cell = row.createCell(j++);
 				cell.setCellValue(user.getHobby()); // 爱好
 				cell.setCellStyle(content);
