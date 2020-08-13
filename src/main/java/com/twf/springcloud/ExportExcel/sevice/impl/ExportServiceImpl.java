@@ -25,7 +25,7 @@ public class ExportServiceImpl implements ExportService{
 	Logger logger = LoggerFactory.getLogger(ExportServiceImpl.class);
 
 	@Override
-	public ResponseEntity<byte[]> exportExcel1(HttpServletRequest request, HttpServletResponse response) {
+	public ResponseEntity<byte[]> exportExcel(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			logger.info(">>>>>>>>>>开始导出excel>>>>>>>>>>");
 			// 造几条数据
@@ -48,7 +48,7 @@ public class ExportServiceImpl implements ExportService{
 			//Workbook workbook = new HSSFWorkbook();
 
 			// 写入数据到工作簿对象内
-			InputStream workbookInputStream = exportData1(workbook,list, tableName, title, titleLength);
+			InputStream workbookInputStream = exportData(workbook,list, tableName, title, titleLength);
 
 			return ExcelWriterUtil.buildResponseEntity(workbookInputStream, tableName);
 		} catch (Exception e) {
@@ -62,7 +62,7 @@ public class ExportServiceImpl implements ExportService{
 	 * @param dataList 数据列表
 	 * @return 写入数据后的工作簿对象
 	 */
-	public static InputStream exportData1(Workbook workbook,List<User> dataList,String tableName,String[] title,int[] titleLength){
+	public static InputStream exportData(Workbook workbook,List<User> dataList,String tableName,String[] title,int[] titleLength){
 		ByteArrayOutputStream output = null;
 		InputStream inputStream = null;
 		// 生成xlsx的Excel

@@ -7,5 +7,5 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface ExportService {
 
-	ResponseEntity<byte[]> exportExcel1(HttpServletRequest request, HttpServletResponse response);
+	ResponseEntity<byte[]> exportExcel(HttpServletRequest request, HttpServletResponse response);
 }

@@ -28,9 +28,9 @@ public class ExportController {
 
 
 	// 导出excel优化方法
-	@RequestMapping("exportExcel1")
-	public ResponseEntity<byte[]> exportExcel1(HttpServletRequest request, HttpServletResponse response) {
-		return exportService.exportExcel1(request,response);
+	@RequestMapping("exportExcel")
+	public ResponseEntity<byte[]> exportExcel(HttpServletRequest request, HttpServletResponse response) {
+		return exportService.exportExcel(request,response);
 	}
 
 
